@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/grupoMenu"
+        android:visible="true"
+        android:enabled="true"
+
+        >
+
+        <item
+            android:id="@+id/inicio"
+            android:checked="false"
+            android:icon="@drawable/inicio_menu"
+            android:title="@string/inicio" />
+
+        <item
+            android:id="@+id/recomendaciones"
+            android:checked="false"
+            android:icon="@drawable/recomendaciones_menu"
+            android:title="@string/recomendaciones" />
+
+        <item
+            android:id="@+id/glosario"
+            android:checked="false"
+            android:icon="@drawable/glosario_menu"
+
+            android:title="@string/glosario" />
+
+        <item
+            android:id="@+id/zonasrestriccion"
+            android:checked="false"
+            android:icon="@drawable/zonas_de_restriccion_menu"
+            android:title="@string/zonasrestriccion" />
+
+
+
+
+    </group>
+</menu>
