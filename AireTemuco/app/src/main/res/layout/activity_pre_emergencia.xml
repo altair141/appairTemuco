@@ -18,11 +18,26 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar_pre_emergencia"
             />
+
         <FrameLayout
             android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
+            <include android:id="@+id/estacion_monitoreo"
+                layout="@layout/estacion_monitoreo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <include android:id="@+id/white_bar"
+                layout="@layout/white_line"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back_landscape"
+                android:id="@+id/imageView"
+
+                android:layout_gravity="center|bottom|left|right"
+                />
 
         </FrameLayout>
 
