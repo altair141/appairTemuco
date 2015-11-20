@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/estacionmonitoreo_museoferroviario"
 
-        android:id="@+id/imageView6"
+        android:id="@+id/imgMuseo"
         android:alpha="0.3" />
 
     <ImageView
@@ -17,13 +17,13 @@
         android:layout_height="wrap_content"
         android:src="@drawable/estacionmonitoreo_lasencinas"
 
-        android:id="@+id/imageView7"
+        android:id="@+id/imgEncinas"
         android:alpha="0.3" />
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:src="@drawable/estacionmonitoreo_padrelascasas"
-        android:id="@+id/imageView8"
+        android:id="@+id/imgPadreLasCasas"
         android:alpha="0.3" />
 </LinearLayout>

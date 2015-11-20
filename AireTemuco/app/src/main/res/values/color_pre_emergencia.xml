@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="PrimaryColorPreEmergencia">#C62827</color>
-    <color name="PrimaryDarkColorPreEmergencia">#F44336</color>
+    <color name="PrimaryColorPreEmergencia">#AB2B2B</color>
+    <color name="PrimaryDarkColorPreEmergencia">#C62829</color>
     <color name="fondo">#06182C</color>
 </resources>
