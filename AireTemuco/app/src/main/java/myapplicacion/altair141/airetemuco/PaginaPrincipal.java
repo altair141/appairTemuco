@@ -164,18 +164,18 @@ public class PaginaPrincipal extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                 } else if (tituloMenu.equals("Recomendaciones")) {
                     drawerLayout.closeDrawers();
-                    // Intent intent = new Intent(PaginaPrincipal.this, Recomendacion.class);
+                    Intent intent = new Intent(PaginaPrincipal.this, Recomendacion.class);
 
-                    // startActivity(intent);
-                    //  setResult(Activity.RESULT_OK);
-                    // finish();
+                    startActivity(intent);
+                    setResult(Activity.RESULT_OK);
+                    finish();
                 } else if (tituloMenu.equals("Glosario")) {
                     drawerLayout.closeDrawers();
-                    // Intent intent = new Intent(PaginaPrincipal.this, Glosario.class);
+                    Intent intent = new Intent(PaginaPrincipal.this, Glosario.class);
 
-                    //startActivity(intent);
-                    //  setResult(Activity.RESULT_OK);
-                    // finish();
+                    startActivity(intent);
+                    setResult(Activity.RESULT_OK);
+                    finish();
                 }
                 return true;
             }
@@ -540,63 +540,63 @@ public class PaginaPrincipal extends AppCompatActivity {
             //  txtResult.setText("Calculando...");
             Condicion condicion = new Condicion();
 
-                if (isOnline()) {
-                    condicion.start();
-                    if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
-                            condicion.getTipoAlerta().equals("sin información") || condicion.getTipoAlerta().equals("sin informacion")
-                            ) {
-                        informacion_restriccion.setImageResource(R.drawable.sin_informacion_bar);
+            if (isOnline()) {
+                condicion.start();
+                if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
+                        condicion.getTipoAlerta().equals("sin información") || condicion.getTipoAlerta().equals("sin informacion")
+                        ) {
+                    informacion_restriccion.setImageResource(R.drawable.sin_informacion_bar);
 
-                    } else if (condicion.getTipoAlerta().equals("Restricción") || condicion.getTipoAlerta().equals("RESTRICCIÓN") ||
-                            condicion.getTipoAlerta().equals("restricción") || condicion.getTipoAlerta().equals("restriccion")) {
+                } else if (condicion.getTipoAlerta().equals("Restricción") || condicion.getTipoAlerta().equals("RESTRICCIÓN") ||
+                        condicion.getTipoAlerta().equals("restricción") || condicion.getTipoAlerta().equals("restriccion")) {
 
-                        informacion_restriccion.setImageResource(R.drawable.restriccion);
-                    } else if (condicion.getTipoAlerta().equals("Sin Restricción") || condicion.getTipoAlerta().equals("SIN RESTRICCIÓN") ||
-                            condicion.getTipoAlerta().equals("sin restricción") || condicion.getTipoAlerta().equals("sin restriccion")
-                            ) {
+                    informacion_restriccion.setImageResource(R.drawable.restriccion);
+                } else if (condicion.getTipoAlerta().equals("Sin Restricción") || condicion.getTipoAlerta().equals("SIN RESTRICCIÓN") ||
+                        condicion.getTipoAlerta().equals("sin restricción") || condicion.getTipoAlerta().equals("sin restriccion")
+                        ) {
 
-                        informacion_restriccion.setImageResource(R.drawable.sin_restriccion);
-                    }
-
-
-                    if (condicion.getTipoCondicion().equals("alerta") || condicion.getTipoCondicion().equals("Alerta") || condicion.getTipoCondicion().equals("ALERTA")) {
-                        tipoCondicion.setText("ALERTA");
-                        drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
-                    } else if (condicion.getTipoCondicion().equals("bueno") || condicion.getTipoCondicion().equals("Bueno") || condicion.getTipoCondicion().equals("BUENO")) {
-                        tipoCondicion.setText("BUENO");
-                        drawerLayout.setBackgroundResource(R.drawable.background_buenocondition);
-                    } else if (condicion.getTipoCondicion().equals("regular") || condicion.getTipoCondicion().equals("Regular") || condicion.getTipoCondicion().equals("REGULAR")) {
-                        tipoCondicion.setText("REGULAR");
-                        drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
-                    } else if (condicion.getTipoCondicion().equals("preemergencia") || condicion.getTipoCondicion().equals("Preemergencia") || condicion.getTipoCondicion().equals("PREEMERGENCIA")) {
-                        tipoCondicion.setText("PREEMERGENCIA");
-                        drawerLayout.setBackgroundResource(R.drawable.background_preemergenciacondition);
-                    } else if (condicion.getTipoCondicion().equals("emergencia") || condicion.getTipoCondicion().equals("Emergencia") || condicion.getTipoCondicion().equals("EMERGENCIA")) {
-                        tipoCondicion.setText("EMERGENCIA");
-                        drawerLayout.setBackgroundResource(R.drawable.background_emergenciacondition);
-                    } else if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
-                            condicion.getTipoAlerta().equals("sin información") || condicion.getTipoAlerta().equals("sin informacion")
-                            ) {
-                        tipoCondicion.setText("SIN INFORMACIÓN");
-                        drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
-
-                    }
-
-                    estaciones = new EstacionMonitoreo();
-
-                    listaMuseoFerroviario = estaciones.getListaContaminacion1();
-                    //Collections.reverse(listaMuseoFerroviario);
-                    listaLasEncinas = estaciones.getListaContaminacion2();
-                    // Collections.reverse(listaLasEncinas);
-                    listaPadreLasCasas = estaciones.getListaContaminacion3();
-
-                    // Collections.reverse(listaPadreLasCasas);
-                } else {
-
-                    drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
-                    informacion_restriccion.setImageResource(R.drawable.sin_conexion_bar);
-                    tipoCondicion.setText("SIN CONEXIÓN");
+                    informacion_restriccion.setImageResource(R.drawable.sin_restriccion);
                 }
+
+
+                if (condicion.getTipoCondicion().equals("alerta") || condicion.getTipoCondicion().equals("Alerta") || condicion.getTipoCondicion().equals("ALERTA")) {
+                    tipoCondicion.setText("ALERTA");
+                    drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
+                } else if (condicion.getTipoCondicion().equals("bueno") || condicion.getTipoCondicion().equals("Bueno") || condicion.getTipoCondicion().equals("BUENO")) {
+                    tipoCondicion.setText("BUENO");
+                    drawerLayout.setBackgroundResource(R.drawable.background_buenocondition);
+                } else if (condicion.getTipoCondicion().equals("regular") || condicion.getTipoCondicion().equals("Regular") || condicion.getTipoCondicion().equals("REGULAR")) {
+                    tipoCondicion.setText("REGULAR");
+                    drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
+                } else if (condicion.getTipoCondicion().equals("preemergencia") || condicion.getTipoCondicion().equals("Preemergencia") || condicion.getTipoCondicion().equals("PREEMERGENCIA")) {
+                    tipoCondicion.setText("PREEMERGENCIA");
+                    drawerLayout.setBackgroundResource(R.drawable.background_preemergenciacondition);
+                } else if (condicion.getTipoCondicion().equals("emergencia") || condicion.getTipoCondicion().equals("Emergencia") || condicion.getTipoCondicion().equals("EMERGENCIA")) {
+                    tipoCondicion.setText("EMERGENCIA");
+                    drawerLayout.setBackgroundResource(R.drawable.background_emergenciacondition);
+                } else if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
+                        condicion.getTipoAlerta().equals("sin información") || condicion.getTipoAlerta().equals("sin informacion")
+                        ) {
+                    tipoCondicion.setText("SIN INFORMACIÓN");
+                    drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
+
+                }
+
+                estaciones = new EstacionMonitoreo();
+
+                listaMuseoFerroviario = estaciones.getListaContaminacion1();
+                //Collections.reverse(listaMuseoFerroviario);
+                listaLasEncinas = estaciones.getListaContaminacion2();
+                // Collections.reverse(listaLasEncinas);
+                listaPadreLasCasas = estaciones.getListaContaminacion3();
+
+                // Collections.reverse(listaPadreLasCasas);
+            } else {
+
+                drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
+                informacion_restriccion.setImageResource(R.drawable.sin_conexion_bar);
+                tipoCondicion.setText("SIN CONEXIÓN");
+            }
 
 //}
 

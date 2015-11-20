@@ -21,6 +21,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Glosario"
+            android:label="Glosario"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".Recomendacion"
+            android:label="Recomendaciones"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".PaginaPrincipal"
             android:label="AireTemuco"
             android:screenOrientation="portrait"/>
