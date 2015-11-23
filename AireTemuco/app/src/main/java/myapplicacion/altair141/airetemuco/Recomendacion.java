@@ -40,6 +40,7 @@ public class Recomendacion extends AppCompatActivity {
     private LinearLayout layoutTabla;
     private LinearLayout condicion_emergencia;
     private ViewFlipper vf;
+    private String mensaje="";
     ImageView image1, image2, image3;
     TextView textView;
     // Set the duration of the splash screen
@@ -51,7 +52,7 @@ public class Recomendacion extends AppCompatActivity {
 
         setContentView(R.layout.activity_recomendacion);
         Bundle bundle = this.getIntent().getExtras();
-
+        mensaje=bundle.getString("tipoCondicion");
         // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setSubtitle("Temuco y Padre Las Casas");
@@ -105,7 +106,7 @@ public class Recomendacion extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(Recomendacion.this, PaginaPrincipal.class);
-
+                    intent.putExtra("tipoCondicion",mensaje);
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -117,7 +118,7 @@ public class Recomendacion extends AppCompatActivity {
                 else if(tituloMenu.equals("Glosario")){
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(Recomendacion.this, Glosario.class);
-
+                    intent.putExtra("tipoCondicion",mensaje);
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -192,6 +193,30 @@ public class Recomendacion extends AppCompatActivity {
 
         vf = (ViewFlipper) findViewById(R.id.viewFlipper);
         vf.setOnTouchListener(new ListenerTouchViewFlipper());
+
+        
+        if (mensaje.equals("alerta") || mensaje.equals("Alerta") || mensaje.equals("ALERTA")) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
+        } else if (mensaje.equals("bueno") || mensaje.equals("Bueno") || mensaje.equals("BUENO")) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_buenocondition);
+        } else if (mensaje.equals("regular") || mensaje.equals("Regular") || mensaje.equals("REGULAR")) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
+        } else if (mensaje.equals("preemergencia") || mensaje.equals("Preemergencia") || mensaje.equals("PREEMERGENCIA")) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_preemergenciacondition);
+        } else if (mensaje.equals("emergencia") || mensaje.equals("Emergencia") || mensaje.equals("EMERGENCIA")) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_emergenciacondition);
+        } else if (mensaje.equals("Sin Información") || mensaje.equals("SIN INFORMACIÓN") ||
+                mensaje.equals("sin información") || mensaje.equals("sin informacion")||mensaje.equals("")
+                ) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
+
+        }
 
     }
     private class ListenerTouchViewFlipper implements View.OnTouchListener{

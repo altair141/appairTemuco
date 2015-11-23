@@ -79,6 +79,7 @@ public class PaginaPrincipal extends AppCompatActivity {
     private TableLayout tabla_contaminacion;
     private TextView tipoCondicion;
 
+    private String mensaje;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +88,7 @@ public class PaginaPrincipal extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        mensaje="";
         final Fecha fechaObj = new Fecha();
         tabla_contaminacion = (TableLayout) findViewById(R.id.tabla_contaminacion);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -166,6 +168,7 @@ public class PaginaPrincipal extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(PaginaPrincipal.this, Recomendacion.class);
 
+                     intent.putExtra("tipoCondicion",mensaje);
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -173,6 +176,7 @@ public class PaginaPrincipal extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(PaginaPrincipal.this, Glosario.class);
 
+                    intent.putExtra("tipoCondicion",mensaje);
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -538,8 +542,8 @@ public class PaginaPrincipal extends AppCompatActivity {
         protected void onPreExecute() {
             Log.i(TAG, "onPreExecute");
             //  txtResult.setText("Calculando...");
-            Condicion condicion = new Condicion();
 
+            Condicion condicion = new Condicion();
             if (isOnline()) {
                 condicion.start();
                 if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
@@ -561,23 +565,29 @@ public class PaginaPrincipal extends AppCompatActivity {
 
                 if (condicion.getTipoCondicion().equals("alerta") || condicion.getTipoCondicion().equals("Alerta") || condicion.getTipoCondicion().equals("ALERTA")) {
                     tipoCondicion.setText("ALERTA");
+                    mensaje="alerta";
                     drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
                 } else if (condicion.getTipoCondicion().equals("bueno") || condicion.getTipoCondicion().equals("Bueno") || condicion.getTipoCondicion().equals("BUENO")) {
                     tipoCondicion.setText("BUENO");
+                    mensaje="bueno";
                     drawerLayout.setBackgroundResource(R.drawable.background_buenocondition);
                 } else if (condicion.getTipoCondicion().equals("regular") || condicion.getTipoCondicion().equals("Regular") || condicion.getTipoCondicion().equals("REGULAR")) {
                     tipoCondicion.setText("REGULAR");
+                    mensaje="regular";
                     drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
                 } else if (condicion.getTipoCondicion().equals("preemergencia") || condicion.getTipoCondicion().equals("Preemergencia") || condicion.getTipoCondicion().equals("PREEMERGENCIA")) {
                     tipoCondicion.setText("PREEMERGENCIA");
+                    mensaje="preemergencia";
                     drawerLayout.setBackgroundResource(R.drawable.background_preemergenciacondition);
                 } else if (condicion.getTipoCondicion().equals("emergencia") || condicion.getTipoCondicion().equals("Emergencia") || condicion.getTipoCondicion().equals("EMERGENCIA")) {
                     tipoCondicion.setText("EMERGENCIA");
+                    mensaje="emergencia";
                     drawerLayout.setBackgroundResource(R.drawable.background_emergenciacondition);
                 } else if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
                         condicion.getTipoAlerta().equals("sin información") || condicion.getTipoAlerta().equals("sin informacion")
                         ) {
                     tipoCondicion.setText("SIN INFORMACIÓN");
+                    mensaje="sin informacion";
                     drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
 
                 }

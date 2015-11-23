@@ -20,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import capaNegocio.Condicion;
 import capaObjetos.AdaptadorListaExpandible;
 
 /**
@@ -30,6 +31,8 @@ public class Glosario extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    private String mensaje="";
+
     //---------------------------------------
     List<String> groupList;
     List<String> childList;
@@ -45,7 +48,7 @@ public class Glosario extends AppCompatActivity {
 
         setContentView(R.layout.activity_glosario);
         Bundle bundle = this.getIntent().getExtras();
-
+        mensaje=bundle.getString("tipoCondicion");
         // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setSubtitle("Temuco y Padre Las Casas");
@@ -89,6 +92,7 @@ public class Glosario extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(Glosario.this, PaginaPrincipal.class);
 
+                    intent.putExtra("tipoCondicion", mensaje);
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -96,7 +100,7 @@ public class Glosario extends AppCompatActivity {
                 else if(tituloMenu.equals("Recomendaciones")){
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(Glosario.this, Recomendacion.class);
-
+                    intent.putExtra("tipoCondicion",mensaje);
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -173,6 +177,34 @@ public class Glosario extends AppCompatActivity {
                 return false;
             }
         });
+
+
+
+
+
+        if (mensaje.equals("alerta") || mensaje.equals("Alerta") || mensaje.equals("ALERTA")) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
+        } else if (mensaje.equals("bueno") || mensaje.equals("Bueno") || mensaje.equals("BUENO")) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_buenocondition);
+        } else if (mensaje.equals("regular") || mensaje.equals("Regular") || mensaje.equals("REGULAR")) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
+        } else if (mensaje.equals("preemergencia") || mensaje.equals("Preemergencia") || mensaje.equals("PREEMERGENCIA")) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_preemergenciacondition);
+        } else if (mensaje.equals("emergencia") || mensaje.equals("Emergencia") || mensaje.equals("EMERGENCIA")) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_emergenciacondition);
+        } else if (mensaje.equals("Sin Información") || mensaje.equals("SIN INFORMACIÓN") ||
+                mensaje.equals("sin información") || mensaje.equals("sin informacion")||mensaje.equals("")
+                ) {
+
+            drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
+
+        }
+
     }
 
     @Override
