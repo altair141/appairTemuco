@@ -1,6 +1,8 @@
 package myapplicacion.altair141.airetemuco;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -104,8 +106,22 @@ public class Recomendacion extends AppCompatActivity {
                 String tituloMenu= (String) menuItem.getTitle();
                 if(tituloMenu.equals("Inicio")){
                     drawerLayout.closeDrawers();
-                    drawerLayout.closeDrawers();
+
+
                     Intent intent = new Intent(Recomendacion.this, PaginaPrincipal.class);
+                    try {
+                        Thread.sleep(400);
+                    }
+                    catch (InterruptedException e){}
+
+                    AlertDialog.Builder dialogo = new AlertDialog.Builder(Recomendacion.this);
+
+                    dialogo.setTitle("Espere por favor");
+                    dialogo.setMessage("Cargando datos...");
+
+                    dialogo.create();
+                    dialogo.show();
+
                     intent.putExtra("tipoCondicion",mensaje);
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
@@ -194,7 +210,7 @@ public class Recomendacion extends AppCompatActivity {
         vf = (ViewFlipper) findViewById(R.id.viewFlipper);
         vf.setOnTouchListener(new ListenerTouchViewFlipper());
 
-        
+
         if (mensaje.equals("alerta") || mensaje.equals("Alerta") || mensaje.equals("ALERTA")) {
 
             drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);

@@ -1,5 +1,6 @@
 package myapplicacion.altair141.airetemuco;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
 import android.media.Image;
@@ -80,6 +81,7 @@ public class PaginaPrincipal extends AppCompatActivity {
     private TextView tipoCondicion;
 
     private String mensaje;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +90,7 @@ public class PaginaPrincipal extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        mensaje="";
+        mensaje = "";
         final Fecha fechaObj = new Fecha();
         tabla_contaminacion = (TableLayout) findViewById(R.id.tabla_contaminacion);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -168,7 +170,7 @@ public class PaginaPrincipal extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(PaginaPrincipal.this, Recomendacion.class);
 
-                     intent.putExtra("tipoCondicion",mensaje);
+                    intent.putExtra("tipoCondicion", mensaje);
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -176,7 +178,7 @@ public class PaginaPrincipal extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(PaginaPrincipal.this, Glosario.class);
 
-                    intent.putExtra("tipoCondicion",mensaje);
+                    intent.putExtra("tipoCondicion", mensaje);
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -496,9 +498,17 @@ public class PaginaPrincipal extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_refresh:
                 Intent intent = new Intent(PaginaPrincipal.this, PaginaPrincipal.class);
+                AlertDialog.Builder dialogo = new AlertDialog.Builder(PaginaPrincipal.this);
 
+                dialogo.setTitle("Espere por favor");
+                dialogo.setMessage("Cargando datos...");
+
+                dialogo.create();
+                dialogo.show();
                 startActivity(intent);
+
                 setResult(Activity.RESULT_OK);
+
                 finish();
                 break;
         }
@@ -542,73 +552,77 @@ public class PaginaPrincipal extends AppCompatActivity {
         protected void onPreExecute() {
             Log.i(TAG, "onPreExecute");
             //  txtResult.setText("Calculando...");
+            try {
+                Condicion condicion = new Condicion();
+                if (isOnline()) {
+                    condicion.start();
+                    if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
+                            condicion.getTipoAlerta().equals("sin información") || condicion.getTipoAlerta().equals("sin informacion")
+                            ) {
+                        informacion_restriccion.setImageResource(R.drawable.sin_informacion_bar);
 
-            Condicion condicion = new Condicion();
-            if (isOnline()) {
-                condicion.start();
-                if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
-                        condicion.getTipoAlerta().equals("sin información") || condicion.getTipoAlerta().equals("sin informacion")
-                        ) {
-                    informacion_restriccion.setImageResource(R.drawable.sin_informacion_bar);
+                    } else if (condicion.getTipoAlerta().equals("Restricción") || condicion.getTipoAlerta().equals("RESTRICCIÓN") ||
+                            condicion.getTipoAlerta().equals("restricción") || condicion.getTipoAlerta().equals("restriccion")) {
 
-                } else if (condicion.getTipoAlerta().equals("Restricción") || condicion.getTipoAlerta().equals("RESTRICCIÓN") ||
-                        condicion.getTipoAlerta().equals("restricción") || condicion.getTipoAlerta().equals("restriccion")) {
+                        informacion_restriccion.setImageResource(R.drawable.restriccion);
+                    } else if (condicion.getTipoAlerta().equals("Sin Restricción") || condicion.getTipoAlerta().equals("SIN RESTRICCIÓN") ||
+                            condicion.getTipoAlerta().equals("sin restricción") || condicion.getTipoAlerta().equals("sin restriccion")
+                            ) {
 
-                    informacion_restriccion.setImageResource(R.drawable.restriccion);
-                } else if (condicion.getTipoAlerta().equals("Sin Restricción") || condicion.getTipoAlerta().equals("SIN RESTRICCIÓN") ||
-                        condicion.getTipoAlerta().equals("sin restricción") || condicion.getTipoAlerta().equals("sin restriccion")
-                        ) {
-
-                    informacion_restriccion.setImageResource(R.drawable.sin_restriccion);
-                }
+                        informacion_restriccion.setImageResource(R.drawable.sin_restriccion);
+                    }
 
 
-                if (condicion.getTipoCondicion().equals("alerta") || condicion.getTipoCondicion().equals("Alerta") || condicion.getTipoCondicion().equals("ALERTA")) {
-                    tipoCondicion.setText("ALERTA");
-                    mensaje="alerta";
-                    drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
-                } else if (condicion.getTipoCondicion().equals("bueno") || condicion.getTipoCondicion().equals("Bueno") || condicion.getTipoCondicion().equals("BUENO")) {
-                    tipoCondicion.setText("BUENO");
-                    mensaje="bueno";
-                    drawerLayout.setBackgroundResource(R.drawable.background_buenocondition);
-                } else if (condicion.getTipoCondicion().equals("regular") || condicion.getTipoCondicion().equals("Regular") || condicion.getTipoCondicion().equals("REGULAR")) {
-                    tipoCondicion.setText("REGULAR");
-                    mensaje="regular";
-                    drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
-                } else if (condicion.getTipoCondicion().equals("preemergencia") || condicion.getTipoCondicion().equals("Preemergencia") || condicion.getTipoCondicion().equals("PREEMERGENCIA")) {
-                    tipoCondicion.setText("PREEMERGENCIA");
-                    mensaje="preemergencia";
-                    drawerLayout.setBackgroundResource(R.drawable.background_preemergenciacondition);
-                } else if (condicion.getTipoCondicion().equals("emergencia") || condicion.getTipoCondicion().equals("Emergencia") || condicion.getTipoCondicion().equals("EMERGENCIA")) {
-                    tipoCondicion.setText("EMERGENCIA");
-                    mensaje="emergencia";
-                    drawerLayout.setBackgroundResource(R.drawable.background_emergenciacondition);
-                } else if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
-                        condicion.getTipoAlerta().equals("sin información") || condicion.getTipoAlerta().equals("sin informacion")
-                        ) {
-                    tipoCondicion.setText("SIN INFORMACIÓN");
-                    mensaje="sin informacion";
+                    if (condicion.getTipoCondicion().equals("alerta") || condicion.getTipoCondicion().equals("Alerta") || condicion.getTipoCondicion().equals("ALERTA")) {
+                        tipoCondicion.setText("ALERTA");
+                        mensaje = "alerta";
+                        drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
+                    } else if (condicion.getTipoCondicion().equals("bueno") || condicion.getTipoCondicion().equals("Bueno") || condicion.getTipoCondicion().equals("BUENO")) {
+                        tipoCondicion.setText("BUENO");
+                        mensaje = "bueno";
+                        drawerLayout.setBackgroundResource(R.drawable.background_buenocondition);
+                    } else if (condicion.getTipoCondicion().equals("regular") || condicion.getTipoCondicion().equals("Regular") || condicion.getTipoCondicion().equals("REGULAR")) {
+                        tipoCondicion.setText("REGULAR");
+                        mensaje = "regular";
+                        drawerLayout.setBackgroundResource(R.drawable.background_alerta_regularcondition);
+                    } else if (condicion.getTipoCondicion().equals("preemergencia") || condicion.getTipoCondicion().equals("Preemergencia") || condicion.getTipoCondicion().equals("PREEMERGENCIA")) {
+                        tipoCondicion.setText("PREEMERGENCIA");
+                        mensaje = "preemergencia";
+                        drawerLayout.setBackgroundResource(R.drawable.background_preemergenciacondition);
+                    } else if (condicion.getTipoCondicion().equals("emergencia") || condicion.getTipoCondicion().equals("Emergencia") || condicion.getTipoCondicion().equals("EMERGENCIA")) {
+                        tipoCondicion.setText("EMERGENCIA");
+                        mensaje = "emergencia";
+                        drawerLayout.setBackgroundResource(R.drawable.background_emergenciacondition);
+                    } else if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
+                            condicion.getTipoAlerta().equals("sin información") || condicion.getTipoAlerta().equals("sin informacion")
+                            ) {
+                        tipoCondicion.setText("SIN INFORMACIÓN");
+                        mensaje = "sin informacion";
+                        drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
+
+                    }
+
+                    estaciones = new EstacionMonitoreo();
+
+                    listaMuseoFerroviario = estaciones.getListaContaminacion1();
+                    //Collections.reverse(listaMuseoFerroviario);
+                    listaLasEncinas = estaciones.getListaContaminacion2();
+                    // Collections.reverse(listaLasEncinas);
+                    listaPadreLasCasas = estaciones.getListaContaminacion3();
+
+                    // Collections.reverse(listaPadreLasCasas);
+                } else {
+
                     drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
-
+                    informacion_restriccion.setImageResource(R.drawable.sin_conexion_bar);
+                    tipoCondicion.setText("SIN CONEXIÓN");
                 }
 
-                estaciones = new EstacionMonitoreo();
-
-                listaMuseoFerroviario = estaciones.getListaContaminacion1();
-                //Collections.reverse(listaMuseoFerroviario);
-                listaLasEncinas = estaciones.getListaContaminacion2();
-                // Collections.reverse(listaLasEncinas);
-                listaPadreLasCasas = estaciones.getListaContaminacion3();
-
-                // Collections.reverse(listaPadreLasCasas);
-            } else {
-
+            } catch (NullPointerException e) {
                 drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
                 informacion_restriccion.setImageResource(R.drawable.sin_conexion_bar);
                 tipoCondicion.setText("SIN CONEXIÓN");
             }
-
-//}
 
         }
 

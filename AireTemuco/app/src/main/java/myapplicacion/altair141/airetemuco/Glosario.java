@@ -1,6 +1,7 @@
 package myapplicacion.altair141.airetemuco;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -91,7 +92,18 @@ public class Glosario extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(Glosario.this, PaginaPrincipal.class);
+                    try {
+                        Thread.sleep(400);
+                    }
+                    catch (InterruptedException e){}
 
+                    AlertDialog.Builder dialogo = new AlertDialog.Builder(Glosario.this);
+
+                    dialogo.setTitle("Espere por favor");
+                    dialogo.setMessage("Cargando datos...");
+
+                    dialogo.create();
+                    dialogo.show();
                     intent.putExtra("tipoCondicion", mensaje);
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
