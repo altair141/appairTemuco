@@ -8,6 +8,11 @@
     <string name="glosario">Glosario</string>
     <string name="zonasrestriccion">Zonas de Restricción</string>
 
+    <string name="tex_pop_up_res1">Prohibición de emisión de humos visibles entre las 18:00 a 06:00 hrs</string>
+    <string name="tex_pop_up_res2">Prohibición de mas de 1 artefacto de leña por vivienda entre las 18:00 y 06:00 hrs</string>
+    <string name="tex_pop_up_res3">Prohibición de emisión de humos visibles de fuentes fijas industriales, comunitarias y comerciales</string>
+    <string name="tex_pop_up_sin_res">NO hay prohibición de humos visibles ni de uso de leña, tanto en las comunas de Temuco como de Padre las Casas</string>
+
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
 </resources>

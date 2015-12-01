@@ -22,11 +22,16 @@ import android.support.v7.internal.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -79,8 +84,26 @@ public class PaginaPrincipal extends AppCompatActivity {
     private List<Contaminacion> listaMuseoFerroviario = new ArrayList<>();
     private TableLayout tabla_contaminacion;
     private TextView tipoCondicion;
-
     private String mensaje;
+    //elementos pop_up
+    ImageButton btn_cerrar_sinres;
+    ImageButton btn_Cerrar1;
+    ImageButton btn_der1;
+    ImageButton btn_Cerrar2;
+    ImageButton btn_der2;
+    ImageButton btn_izq2;
+    ImageButton btn_Cerrar3;
+    ImageButton btn_izq3;
+    View popupView_sinres;
+    PopupWindow popupWindow_sinres;
+    View popupView1;
+    PopupWindow popupWindow1;
+    View popupView2;
+    PopupWindow popupWindow2;
+    LayoutInflater layoutInflater;
+    View popupView3;
+    PopupWindow popupWindow3;
+    //fin elementos pop_up
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,13 +239,7 @@ public class PaginaPrincipal extends AppCompatActivity {
 
         layoutTabla.setVisibility(LinearLayout.GONE);
 
-        condicion_emergencia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-            }
-        });
 
         //----------------------------------------estacion de monitoreo----------------------------------------
 
@@ -483,6 +500,117 @@ public class PaginaPrincipal extends AppCompatActivity {
         task.execute();
 
         // fechaText.setText(listaMuseoFerroviario.size());
+        condicion_emergencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //borrar desde aqui
+                Condicion condicion = new Condicion();
+                condicion.start();
+                //borrar asta aqui
+                layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                popupView1 = layoutInflater.inflate(R.layout.pop_up_res1, null);
+                popupWindow1 = new PopupWindow(popupView1, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+                popupView2 = layoutInflater.inflate(R.layout.pop_up_res2, null);
+                popupWindow2 = new PopupWindow(popupView2, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+                popupView3 = layoutInflater.inflate(R.layout.pop_up_res3, null);
+                popupWindow3 = new PopupWindow(popupView3, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+                popupView_sinres = layoutInflater.inflate(R.layout.pop_up_sin_res, null);
+                popupWindow_sinres = new PopupWindow(popupView_sinres, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+
+                //boton pop_sin_res
+                btn_cerrar_sinres = (ImageButton) popupView_sinres.findViewById(R.id.cerrarSinRes);
+                btn_cerrar_sinres.setOnClickListener(new Button.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow_sinres.dismiss();
+                    }
+                });
+                //--------------------------------------------------------
+                //botones pop1
+                btn_Cerrar1 = (ImageButton) popupView1.findViewById(R.id.cerrarRes1);
+                btn_Cerrar1.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow1.dismiss();
+                    }
+                });
+                btn_der1 = (ImageButton) popupView1.findViewById(R.id.derechaRes1);
+                btn_der1.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        //cerar pop1 y abrir pop2
+                        popupWindow1.dismiss();
+                        popupWindow2.showAtLocation(popupView3, 1, 1, 0);
+                    }
+                });
+                //-----------------------------------------------------
+                //botones pop2
+                btn_Cerrar2 = (ImageButton) popupView2.findViewById(R.id.cerrarRes2);
+                btn_Cerrar2.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow2.dismiss();
+                    }
+                });
+
+                btn_der2 = (ImageButton) popupView2.findViewById(R.id.derechaRes2);
+                btn_der2.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        //cerar pop2 y abrir pop3
+                        popupWindow2.dismiss();
+                        popupWindow3.showAtLocation(popupView3, 1, 1, 0);
+                    }
+                });
+                btn_izq2 = (ImageButton) popupView2.findViewById(R.id.izquerdaRes2);
+                btn_izq2.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        //cerar pop2 y abrir pop1
+                        popupWindow2.dismiss();
+                        popupWindow1.showAtLocation(popupView1, 1, 1, 0);
+                    }
+                });
+                //--------------------------------------------
+                //botones pop3
+                btn_Cerrar3 = (ImageButton) popupView3.findViewById(R.id.cerrarRes3);
+                btn_Cerrar3.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow3.dismiss();
+                    }
+                });
+                btn_izq3 = (ImageButton) popupView3.findViewById(R.id.izquerdaRes3);
+                btn_izq3.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        //cerar pop3 y abrir pop2
+                        popupWindow3.dismiss();
+                        popupWindow2.showAtLocation(popupView1, 1, 1, 0);
+                    }
+                });
+                //--------------------------------------------
+
+                if (condicion.getTipoAlerta().equals("Restricción") || condicion.getTipoAlerta().equals("RESTRICCIÓN") ||
+                        condicion.getTipoAlerta().equals("restricción") || condicion.getTipoAlerta().equals("restriccion")) {
+                    popupWindow1.showAtLocation(popupView1,1,1,0);
+                } else if (condicion.getTipoAlerta().equals("Sin Restricción") || condicion.getTipoAlerta().equals("SIN RESTRICCIÓN") ||
+                        condicion.getTipoAlerta().equals("sin restricción") || condicion.getTipoAlerta().equals("sin restriccion")
+                        ) {
+                    popupWindow_sinres.showAtLocation(popupView_sinres,1,1,0);
+                }
+
+            }
+        });
+
     }
 
     @Override
