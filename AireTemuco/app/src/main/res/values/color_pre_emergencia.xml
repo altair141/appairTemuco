@@ -3,4 +3,5 @@
     <color name="PrimaryColorPreEmergencia">#AB2B2B</color>
     <color name="PrimaryDarkColorPreEmergencia">#C62829</color>
     <color name="fondo">#06182C</color>
+    <color name="barraHerramientas">#000</color>
 </resources>

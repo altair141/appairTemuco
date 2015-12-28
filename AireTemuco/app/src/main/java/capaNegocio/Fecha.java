@@ -31,7 +31,7 @@ public class Fecha {
         if (validarFecha(fecha)) {
             try {
 
-                DateFormat f = new SimpleDateFormat("EEEE dd MMMMM");
+                DateFormat f = new SimpleDateFormat("EEEE-dd-MM");
                 String str1 = fecha;
                 Date date = f.parse(str1);
                 return date;
@@ -67,7 +67,7 @@ public class Fecha {
     }
     private boolean validarFecha(String fecha) {
         try {
-            DateFormat f = new SimpleDateFormat("EEEE dd MMMMM");
+            DateFormat f = new SimpleDateFormat("EEEE-dd-MM");
             String str1 = fecha;
             Date date = f.parse(str1);
             return true;
@@ -93,7 +93,7 @@ public class Fecha {
     }
     public String dateToString(Date date){
 
-        DateFormat f = new SimpleDateFormat("EEEE dd MMMMM");
+        DateFormat f = new SimpleDateFormat("EEEE-dd-MM");
         String fecha=f.format(date);
         return fecha;
     }
@@ -105,7 +105,7 @@ public class Fecha {
     }
     public String generarFecha(){
         Date date = new Date();
-        DateFormat f = new SimpleDateFormat("EEEE dd MMMMM");
+        DateFormat f = new SimpleDateFormat("EEEE-dd-MM");
         String fecha=f.format(date);
 
         return fecha;
@@ -118,14 +118,16 @@ public class Fecha {
         return fecha;
     }
     public  Date sumarRestarDiasFecha(Date fecha, int dias){
-
+        System.out.println(fecha.toString()+"-p--");
         Calendar calendar = Calendar.getInstance();
+
         calendar.setTime(fecha); // Configuramos la fecha que se recibe
         calendar.add(Calendar.DAY_OF_YEAR, dias);  // numero de días a añadir, o restar en caso de días<0
         return calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
+        //return new Date();
     }
     public String [] dividirFecha(String fecha){
-        String []fechaDividida=fecha.split(" ");
+        String []fechaDividida=fecha.split("-");
         return fechaDividida;
     }
 
@@ -150,29 +152,29 @@ public class Fecha {
         }
     }
     public String mayusculaMes(String mes){
-        if(mes.equals("enero")){
+        if(mes.equals("enero")||mes.equals("01")){
             return "Enero";
-        }else if(mes.equals("febrero")){
+        }else if(mes.equals("febrero")||mes.equals("02")){
             return "Febrero";
-        }else if(mes.equals("marzo")){
+        }else if(mes.equals("marzo")||mes.equals("03")){
             return "Marzo";
-        }else if(mes.equals("abril")){
+        }else if(mes.equals("abril")||mes.equals("04")){
             return "Abril";
-        }else if(mes.equals("mayo")){
+        }else if(mes.equals("mayo")||mes.equals("05")){
             return "Mayo";
-        }else if(mes.equals("junio")){
+        }else if(mes.equals("junio")||mes.equals("06")){
             return "Junio";
-        }else if(mes.equals("julio")){
+        }else if(mes.equals("julio")||mes.equals("07")){
             return "Julio";
-        }else if(mes.equals("agosto")){
+        }else if(mes.equals("agosto")||mes.equals("08")){
             return "Agosto";
-        }else if(mes.equals("septiembre")){
+        }else if(mes.equals("septiembre")||mes.equals("09")){
             return "Septiembre";
-        }else if(mes.equals("octubre")){
+        }else if(mes.equals("octubre")||mes.equals("10")){
             return "Octubre";
-        }else if(mes.equals("noviembre")){
+        }else if(mes.equals("noviembre")||mes.equals("11")){
             return "Noviembre";
-        }else if(mes.equals("diciembre")){
+        }else if(mes.equals("diciembre")||mes.equals("12")){
             return "Diciembre";
         }else{
             return mes;

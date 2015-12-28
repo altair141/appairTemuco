@@ -139,18 +139,14 @@ public class Recomendacion extends AppCompatActivity {
                     setResult(Activity.RESULT_OK);
                     finish();
                 }
-                else if(idItem==2131493018){
+                else if (tituloMenu.equals("Zonas de Restricción")) {
+                    drawerLayout.closeDrawers();
+                    Intent intent = new Intent(Recomendacion.this, Mapa.class);
 
-                }
-                else if(idItem==2131493019){
-
-
-                }
-                else if(idItem==2131493020){
-                    menuItem.setTitle(menuItem.getItemId());
-                }
-                else if(idItem==2131493021){
-                    menuItem.setTitle(menuItem.getItemId());
+                    intent.putExtra("tipoCondicion", mensaje);
+                    startActivity(intent);
+                    setResult(Activity.RESULT_OK);
+                    finish();
                 }
               /*  navigationView.setItemIconTintList(new ColorStateList(
                         new int [] [] {
