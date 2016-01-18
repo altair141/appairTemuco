@@ -7,7 +7,7 @@
     <string name="recomendaciones">Recomendaciones</string>
     <string name="glosario">Glosario</string>
     <string name="zonasrestriccion">Zonas de Restricción</string>
-
+    <integer name="google_play_services_version">8298000</integer>
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
 </resources>
