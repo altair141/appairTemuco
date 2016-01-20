@@ -34,6 +34,7 @@ public class Glosario extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private String mensaje="";
 
+
     //---------------------------------------
     List<String> groupList;
     List<String> childList;
@@ -121,7 +122,7 @@ public class Glosario extends AppCompatActivity {
                     drawerLayout.closeDrawers();
 
                 }
-                else if (tituloMenu.equals("Zonas de Restricción")) {
+                 else if (tituloMenu.equals("Zonas de Restricción")) {
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(Glosario.this, Mapa.class);
 
@@ -222,6 +223,28 @@ public class Glosario extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                Intent intent = new Intent(Glosario.this, Glosario.class);
+                AlertDialog.Builder dialogo = new AlertDialog.Builder(Glosario.this);
+                intent.putExtra("tipoCondicion", mensaje);
+                dialogo.setTitle("Espere por favor");
+                dialogo.setMessage("Cargando datos...");
+
+                dialogo.create();
+                dialogo.show();
+
+                startActivity(intent);
+
+                setResult(Activity.RESULT_OK);
+
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void cambioalphaBackground(){
         //laptopCollection
         //expListView.getAdapter().getView(2,2,2);
@@ -253,7 +276,7 @@ public class Glosario extends AppCompatActivity {
         groupList.add("Ozono (O3)");
         groupList.add("Plan de Descontaminación");
         groupList.add("Plan de Prevención");
-        groupList.add("MP 2.5");
+        groupList.add("PM 2.5");
         groupList.add("Promedio Móvil");
         groupList.add("Riesgo en Salud, Grupos");
         groupList.add("Validación");

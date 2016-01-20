@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
 
@@ -13,12 +13,14 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical" >
+            android:gravity="center|center_vertical|center_horizontal"
+            android:id="@+id/l_popup_atras"
+            android:layout_weight="1">
 
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/imageView3"
+                android:id="@+id/i_popup_atras"
                 android:src="@drawable/keyboard_arrow_left_2" />
         </LinearLayout>
 
@@ -29,20 +31,23 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView2"
-                android:src="@drawable/con_restriccion_estufas" />
+                android:id="@+id/i_popup_centro"
+                android:src="@drawable/con_restriccion_estufas"
+                android:layout_weight="0" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical" >
+            android:gravity="center|center_vertical|center_horizontal"
+            android:id="@+id/l_popup_despues"
+            android:layout_weight="1">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/imageView4"
+                android:id="@+id/i_popup_siguiente"
                 android:src="@drawable/keyboard_arrow_right_2" />
         </LinearLayout>
     </LinearLayout>

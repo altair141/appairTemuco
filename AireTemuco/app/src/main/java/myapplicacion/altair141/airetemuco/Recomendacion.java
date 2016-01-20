@@ -317,5 +317,26 @@ public class Recomendacion extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                Intent intent = new Intent(Recomendacion.this, Recomendacion.class);
+                AlertDialog.Builder dialogo = new AlertDialog.Builder(Recomendacion.this);
+                intent.putExtra("tipoCondicion",mensaje);
+                dialogo.setTitle("Espere por favor");
+                dialogo.setMessage("Cargando datos...");
 
+                dialogo.create();
+                dialogo.show();
+
+                startActivity(intent);
+
+                setResult(Activity.RESULT_OK);
+
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

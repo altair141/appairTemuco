@@ -101,6 +101,7 @@ try {
         Weather clima = new Weather();
         JsonObject jobject2 = list.get(i).getAsJsonObject();
         String fecha = jobject2.get("dt_txt").getAsString();
+        System.out.println(fecha+" --------fecha transformada de gson a string");
         clima.setFecha(stringtodate(fecha));
         JsonObject tempera = jobject2.get("main").getAsJsonObject();
         clima.setTemperatura((int) tempera.get("temp").getAsDouble());
@@ -128,6 +129,7 @@ try {
         Date date;
         try {
             date = f.parse(str1);
+            System.out.println(date.toString()+"------- fecha del date" );
             return date;
         } catch (ParseException e) {
             // TODO Auto-generated catch block

@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="46dp"
     android:id="@+id/layout_recomendaciones"
-    >
+    android:gravity="center|center_vertical|center_horizontal|left">
 
     <LinearLayout
         android:orientation="horizontal"

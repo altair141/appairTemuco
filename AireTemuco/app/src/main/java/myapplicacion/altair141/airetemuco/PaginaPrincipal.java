@@ -3,6 +3,7 @@ package myapplicacion.altair141.airetemuco;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -55,7 +56,7 @@ import capaNegocio.Weather;
  */
 public class PaginaPrincipal extends AppCompatActivity {
     String TAG = "";
-
+    private int cont_popup = 0;
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
@@ -89,16 +90,29 @@ public class PaginaPrincipal extends AppCompatActivity {
     private TextView tipoCondicion;
     private TextView temperatura;
     private String mensaje;
-    private int contDia=0;
-    private int contadorpopup=0;
+    private int contDia = 0;
+    private int contadorpopup = 0;
     private LinearLayout diaSiguiente;
     private LinearLayout diaAnterior;
-    private  final Fecha fechaObj = new Fecha();
-    private DiaWeather dia=new DiaWeather();
+    private final Fecha fechaObj = new Fecha();
+    private DiaWeather dia = new DiaWeather();
+    //widget del popup
+    private String banner = "";
+    private ImageView img_popup_siguiente;
+    private ImageView img_popup_centro;
+    private ImageView img_popup_atras;
+    private LinearLayout layout_popup_atras;
+    private LinearLayout layout_popup_siguiente;
+    private TextView texto_popup;
+    private  LinearLayout layout_popup;
+    private ImageView banner_popup;
+
+    private LinearLayout contenedorPrincipal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -125,19 +139,21 @@ public class PaginaPrincipal extends AppCompatActivity {
         tipoCondicion = (TextView) findViewById(R.id.condicionTexto);
         imagenClima = (ImageView) findViewById(R.id.imagenClima);
         temperatura = (TextView) findViewById(R.id.temperatura);
+
+        contenedorPrincipal=(LinearLayout)findViewById(R.id.contenedor_principal);
         //------------fecha---------------------
 
-        diaAnterior=(LinearLayout) findViewById(R.id.btnAtras);
-        diaSiguiente=(LinearLayout) findViewById(R.id.btnSiguiente);
+        diaAnterior = (LinearLayout) findViewById(R.id.btnAtras);
+        diaSiguiente = (LinearLayout) findViewById(R.id.btnSiguiente);
 
         fechaString = fechaObj.generarFecha();
         fechaFija = fechaString;
-       // System.out.println(fechaString+"-- --");
+        // System.out.println(fechaString+"-- --");
         String[] datoFecha = fechaObj.dividirFecha(fechaString);
         diafechaText.setText(fechaString);
         diafechaText.setText(fechaObj.mayusculaDia(datoFecha[0]));
         fechaText.setText(datoFecha[1]);
-        System.out.println(datoFecha[2]+"----------------------------------------------------------------");
+        System.out.println(datoFecha[2] + "----------------------------------------------------------------");
         mesfechaText.setText(fechaObj.mayusculaMes(datoFecha[2]));
 
         //------------fecha---------------------
@@ -202,8 +218,7 @@ public class PaginaPrincipal extends AppCompatActivity {
                     startActivity(intent);
                     setResult(Activity.RESULT_OK);
                     finish();
-                }
-                else if (tituloMenu.equals("Zonas de Restricción")) {
+                } else if (tituloMenu.equals("Zonas de Restricción")) {
                     drawerLayout.closeDrawers();
                     Intent intent = new Intent(PaginaPrincipal.this, Mapa.class);
 
@@ -246,12 +261,13 @@ public class PaginaPrincipal extends AppCompatActivity {
         layoutTabla.setVisibility(LinearLayout.GONE);
 
         condicion_emergencia.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                Log.i(TAG,(String) tipoCondicion.getText()+"----------------------------sdf-----------------------------------------");
+                Log.i(TAG, (String) tipoCondicion.getText() + "----------------------------sdf-----------------------------------------");
 
-                if(!tipoCondicion.getText().equals("SIN CONEXIÓN")&&!tipoCondicion.getText().equals("SIN INFORMACIÓN")&&contadorpopup<1) {
-                    contadorpopup=1;
+                if (!tipoCondicion.getText().equals("SIN CONEXIÓN") && !tipoCondicion.getText().equals("SIN INFORMACIÓN") && contadorpopup < 1) {
+                    contadorpopup = 1;
                     LayoutInflater layoutInflater =
                             (LayoutInflater) getBaseContext()
                                     .getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -259,28 +275,112 @@ public class PaginaPrincipal extends AppCompatActivity {
                     final PopupWindow popupWindow = new PopupWindow(
                             popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                    //Update TextView in PopupWindow dynamically
-                    //TextView textOut = (TextView)popupView.findViewById(R.id.textout);
-                    //String stringOut = textIn.getText().toString();
-                    //if(!stringOut.equals("")){
-                    //   textOut.setText(stringOut);
-                    // }
+                    ImageView btnDismiss = (ImageView) popupView.findViewById(R.id.cerrar_popup);
 
-                    ImageView btnDismiss = (ImageView) popupView.findViewById(R.id.dismiss);
+                    img_popup_siguiente = (ImageView) popupView.findViewById(R.id.i_popup_siguiente);
+                    img_popup_centro = (ImageView) popupView.findViewById(R.id.i_popup_centro);
+                    img_popup_atras = (ImageView) popupView.findViewById(R.id.i_popup_atras);
+                    layout_popup_atras = (LinearLayout) popupView.findViewById(R.id.l_popup_atras);
+                    layout_popup_siguiente = (LinearLayout) popupView.findViewById(R.id.l_popup_despues);
+                    texto_popup = (TextView) popupView.findViewById(R.id.texto_popup);
+                    layout_popup=(LinearLayout)popupView.findViewById(R.id.layout_popup);
+                    banner_popup=(ImageView)popupView.findViewById(R.id.banner_popup);
+
 
 
                     btnDismiss.setOnClickListener(new Button.OnClickListener() {
 
                         @Override
                         public void onClick(View v) {
-                            contadorpopup=0;
+                            contadorpopup = 0;
+
                             popupWindow.dismiss();
                         }
                     });
 
-                    popupWindow.showAsDropDown(condicion_emergencia, 0, -360);//50,-30
+                    popupWindow.showAsDropDown(condicion_emergencia,50,-370);//50,-30///, 0, -360
 
 
+
+                    if (banner.equals("restricción")) {
+                        img_popup_siguiente.setImageResource(R.drawable.keyboard_arrow_right_2);
+                        img_popup_atras.setImageResource(R.drawable.back_transparente);
+                        img_popup_centro.setImageResource(R.drawable.con_restriccion_house);
+                        banner_popup.setImageResource(R.drawable.restriccion);
+                        texto_popup.setText("Prohibición de emisión de humos visibles entre las 18:00 a 06:00 hrs.");
+                        layout_popup.setBackgroundResource(R.drawable.pop_up_background_conrestriccion);
+
+                    }
+                    if (banner.equals("sin restricción")) {
+                        img_popup_siguiente.setImageResource(R.drawable.back_transparente);
+                        img_popup_atras.setImageResource(R.drawable.back_transparente);
+                        img_popup_centro.setImageResource(R.drawable.sin_restriccion_house);
+                        layout_popup.setBackgroundResource(R.drawable.pop_up_background_sin_restriccion);
+
+                        banner_popup.setImageResource(R.drawable.sin_restriccion);
+                        texto_popup.setText("NO hay prohíbición de emisión de humos visibles ni de uso de leña, tanto en las comunas de Temuco como de Padre Las Casas.");
+                    }
+
+                    layout_popup_atras.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            cont_popup--;
+                            if (banner.equals("restricción")) {
+                                if (cont_popup <= 0) {
+                                    img_popup_siguiente.setImageResource(R.drawable.keyboard_arrow_right_2);
+                                    img_popup_atras.setImageResource(R.drawable.back_transparente);//invisible
+                                    img_popup_centro.setImageResource(R.drawable.con_restriccion_house);
+                                    texto_popup.setText("Prohibición de emisión de humos visibles entre las 18:00 a 06:00 hrs.");
+                                    Log.i(TAG, cont_popup + "");
+                                    cont_popup = 0;
+                                } else if (cont_popup == 1) {
+                                    img_popup_siguiente.setImageResource(R.drawable.keyboard_arrow_right_2);
+                                    img_popup_atras.setImageResource(R.drawable.keyboard_arrow_left_2);
+                                    img_popup_centro.setImageResource(R.drawable.con_restriccion_estufas);
+                                    texto_popup.setText("Prohibición de más de 1 artefacto de leña por vivienda entre las 18:00 y 06:00 hrs.");
+                                    Log.i(TAG, cont_popup + "");
+
+                                } else if (cont_popup == 2) {
+                                    img_popup_siguiente.setImageResource(R.drawable.back_transparente);
+                                    img_popup_atras.setImageResource(R.drawable.keyboard_arrow_left_2);
+                                    img_popup_centro.setImageResource(R.drawable.con_restriccion_humos_visibles);
+                                    texto_popup.setText("Prohibición de emisión de humos visibles de fuentes fijas industriales, comunitarias y comerciales.");
+                                    Log.i(TAG, cont_popup + "");
+
+                                }
+                            }
+                        }
+                    });
+                    layout_popup_siguiente.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            cont_popup++;
+
+                            if (cont_popup == 0) {
+                                img_popup_siguiente.setImageResource(R.drawable.keyboard_arrow_right_2);
+                                img_popup_atras.setImageResource(R.drawable.back_transparente);//invisible
+                                img_popup_centro.setImageResource(R.drawable.con_restriccion_house);
+                                texto_popup.setText("Prohibición de emisión de humos visibles entre las 18:00 a 06:00 hrs.");
+                                Log.i(TAG, cont_popup + "");
+
+                            } else if (cont_popup == 1) {
+                                img_popup_siguiente.setImageResource(R.drawable.keyboard_arrow_right_2);
+                                img_popup_atras.setImageResource(R.drawable.keyboard_arrow_left_2);
+                                img_popup_centro.setImageResource(R.drawable.con_restriccion_estufas);
+                                texto_popup.setText("Prohibición de más de 1 artefacto de leña por vivienda entre las 18:00 y 06:00 hrs.");
+                                Log.i(TAG, cont_popup + "");
+
+                            } else if (cont_popup >= 2) {
+                                img_popup_siguiente.setImageResource(R.drawable.back_transparente);
+                                img_popup_atras.setImageResource(R.drawable.keyboard_arrow_left_2);
+                                img_popup_centro.setImageResource(R.drawable.con_restriccion_humos_visibles);
+                                texto_popup.setText("Prohibición de emisión de humos visibles de fuentes fijas industriales, comunitarias y comerciales.");
+                                Log.i(TAG, cont_popup + "");
+                                cont_popup = 2;
+                            }
+
+                        }
+                    });
                 }
             }
         });
@@ -300,7 +400,7 @@ public class PaginaPrincipal extends AppCompatActivity {
                 fecha = fechaObj.stringToDate(fechaString);
                 Date fechaF = fechaObj.stringToDate(fechaFija);
                 fechaF = fechaObj.sumarRestarDiasFecha(fechaF, -1);
-                if (fecha.after(fechaF)&& contDia>0 &&contDia!=-1) {
+                if (fecha.after(fechaF) && contDia > 0 && contDia != -1) {
                     fecha = fechaObj.sumarRestarDiasFecha(fecha, -1);
                     fechaString = fechaObj.dateToString(fecha);
                     String[] datoFecha = fechaObj.dividirFecha(fechaString);
@@ -310,10 +410,10 @@ public class PaginaPrincipal extends AppCompatActivity {
                     contDia--;
                     condicionDiaActual();
                     //diaSiguiente.setVisibility(LinearLayout.GONE);
-                   // diaAtras.setVisibility(LinearLayout.GONE);
-                   // diaDespues.setVisibility(LinearLayout.VISIBLE);
+                    // diaAtras.setVisibility(LinearLayout.GONE);
+                    // diaDespues.setVisibility(LinearLayout.VISIBLE);
                     //diaAnterior.setVisibility(LinearLayout.GONE);
-                   // diaAnterior.setBackgroundResource(R.drawable.back_transparente);
+                    // diaAnterior.setBackgroundResource(R.drawable.back_transparente);
                     //diaSiguiente.setVisibility(LinearLayout.VISIBLE);
 
                     //diaSiguiente.setBackgroundResource(R.drawable.keyboard_arrow_right);
@@ -327,15 +427,15 @@ public class PaginaPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fecha = fechaObj.stringToDate(fechaString);
-               // System.out.println(fechaString+" fehca-----");
-                if(fecha!=null) {
-                 //   System.out.println(fecha.toString() + "fechoa objeto -----");
-                }else{
+                System.out.println(fechaString+" fehca-----");
+                if (fecha != null) {
+                    //   System.out.println(fecha.toString() + "fechoa objeto -----");
+                } else {
 
                 }
                 Date fechaF = fechaObj.stringToDate(fechaFija);
                 fechaF = fechaObj.sumarRestarDiasFecha(fechaF, 1);
-                if (fecha.before(fechaF)&&contDia!=-1) {
+                if (fecha.before(fechaF) && contDia != -1) {
                     fecha = fechaObj.sumarRestarDiasFecha(fecha, 1);
                     fechaString = fechaObj.dateToString(fecha);
                     String[] datoFecha = fechaObj.dividirFecha(fechaString);
@@ -343,10 +443,10 @@ public class PaginaPrincipal extends AppCompatActivity {
                     fechaText.setText(datoFecha[1]);
                     mesfechaText.setText(fechaObj.mayusculaMes(datoFecha[2]));
                     contDia++;
-                     condicionDiaActual();
-                   // diaAnterior.setVisibility(LinearLayout.VISIBLE);
-                   // diaAnterior.setBackgroundResource(R.drawable.keyboard_arrow_left);
-                     //diaSiguiente.setBackgroundResource(R.drawable.back_transparente);
+                    condicionDiaActual();
+                    // diaAnterior.setVisibility(LinearLayout.VISIBLE);
+                    // diaAnterior.setBackgroundResource(R.drawable.keyboard_arrow_left);
+                    //diaSiguiente.setBackgroundResource(R.drawable.back_transparente);
                     //diaSiguiente.setVisibility(LinearLayout.GONE);
                     diaDespues.setBackgroundResource(R.drawable.back_transparente);
                     diaAtras.setBackgroundResource(R.drawable.keyboard_arrow_left);
@@ -360,24 +460,25 @@ public class PaginaPrincipal extends AppCompatActivity {
         task.execute();
 
         diaDespues.setBackgroundResource(R.drawable.keyboard_arrow_right);
-       // diaAnterior.setBackgroundResource(R.drawable.back_transparente);
-      // diaAnterior.setVisibility(LinearLayout.GONE);
+        // diaAnterior.setBackgroundResource(R.drawable.back_transparente);
+        // diaAnterior.setVisibility(LinearLayout.GONE);
         // fechaText.setText(listaMuseoFerroviario.size());
     }
 
 
-public void condicionDiaActual(){
+    public void condicionDiaActual() {
 
-    if(contDia==0){
-        temperatura.setText(dia.getTemperatura() + "°C");
-    }else if(contDia<0){
-        temperatura.setText(dia.getTemperatura() + "°C");
+        if (contDia == 0) {
+            temperatura.setText(dia.getTemperatura() + "°C");
+        } else if (contDia < 0) {
+            temperatura.setText(dia.getTemperatura() + "°C");
 
-    }else if (contDia > 0) {
+        } else if (contDia > 0) {
 
-        temperatura.setText(dia.getLista().get(7).getTemperatura() + "°C");
+            temperatura.setText(dia.getLista().get(7).getTemperatura() + "°C");
+        }
     }
-}
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -453,7 +554,8 @@ public void condicionDiaActual(){
                 Condicion condicion = new Condicion();
                 if (isOnline()) {
                     condicion.start();
-                    condicion=testCondicion();
+                    condicion.setTipoCondicion("preemergencia");//Bueno
+                    condicion.setTipoAlerta("restricción");//sin restricción
                     backgroud(condicion);
                     banner(condicion);
 
@@ -481,10 +583,12 @@ public void condicionDiaActual(){
                 drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
                 informacion_restriccion.setImageResource(R.drawable.sin_conexion_bar);
                 tipoCondicion.setText("SIN CONEXIÓN");
+                banner = "sin conexión";
             } catch (IndexOutOfBoundsException e) {
                 drawerLayout.setBackgroundResource(R.drawable.background_sininformacioncondition);
                 informacion_restriccion.setImageResource(R.drawable.sin_conexion_bar);
                 tipoCondicion.setText("SIN CONEXIÓN");
+                banner = "sin conexión";
             }
             //obtiene la informacion del clima del día y del día siguiente
 
@@ -518,7 +622,7 @@ public void condicionDiaActual(){
             Conexion conexionClima = new Conexion();
             //DiaWeather dia= conexionClima.establecerInformacion();
             dia = conexionClima.establecerInformacion();
-        //    System.out.println(dia.getLista().size()+"tamaño lista");
+            //    System.out.println(dia.getLista().size()+"tamaño lista");
             temperatura.setText(dia.getTemperatura() + "°C");
 
 
@@ -556,19 +660,21 @@ public void condicionDiaActual(){
     }
 
     private void banner(Condicion condicion) {
+
         if (condicion.getTipoAlerta().equals("Sin Información") || condicion.getTipoAlerta().equals("SIN INFORMACIÓN") ||
                 condicion.getTipoAlerta().equals("sin información") || condicion.getTipoAlerta().equals("sin informacion")
                 ) {
+            banner = "sin información";
             informacion_restriccion.setImageResource(R.drawable.sin_informacion_bar);
 
         } else if (condicion.getTipoAlerta().equals("Restricción") || condicion.getTipoAlerta().equals("RESTRICCIÓN") ||
                 condicion.getTipoAlerta().equals("restricción") || condicion.getTipoAlerta().equals("restriccion")) {
-
+            banner = "restricción";
             informacion_restriccion.setImageResource(R.drawable.restriccion);
         } else if (condicion.getTipoAlerta().equals("Sin Restricción") || condicion.getTipoAlerta().equals("SIN RESTRICCIÓN") ||
                 condicion.getTipoAlerta().equals("sin restricción") || condicion.getTipoAlerta().equals("sin restriccion")
                 ) {
-
+            banner = "sin restricción";
             informacion_restriccion.setImageResource(R.drawable.sin_restriccion);
         }
     }
@@ -624,7 +730,7 @@ public void condicionDiaActual(){
 
                 checkmuseo = false;
                 checkencinas = false;
-                salirFechaEstacionMOnitoreo(checkpadre,checkencinas,checkmuseo);
+                salirFechaEstacionMOnitoreo(checkpadre, checkencinas, checkmuseo);
                 encinas.setAlpha((float) 0.3);
                 museo.setAlpha((float) 0.3);
                 //---------------------metodos para borrar los datos de contaminacion y cambiar de estacion de monitoreo---------------------
@@ -693,7 +799,7 @@ public void condicionDiaActual(){
 
                 checkmuseo = false;
                 checkpadre = false;
-                salirFechaEstacionMOnitoreo(checkpadre,checkencinas,checkmuseo);
+                salirFechaEstacionMOnitoreo(checkpadre, checkencinas, checkmuseo);
                 museo.setAlpha((float) 0.3);
                 padre.setAlpha((float) 0.3);
                 //---------------------metodos para borrar los datos de contaminacion y cambiar de estacion de monitoreo---------------------
@@ -825,7 +931,8 @@ public void condicionDiaActual(){
             }
         });
     }
-    private void fechaEstacionMonitoreo(){
+
+    private void fechaEstacionMonitoreo() {
         fecha = fechaObj.stringToDate(fechaFija);
 
         fechaString = fechaObj.dateToString(fecha);
@@ -833,27 +940,20 @@ public void condicionDiaActual(){
         diafechaText.setText(fechaObj.mayusculaDia(datoFecha[0]));
         fechaText.setText(datoFecha[1]);
         mesfechaText.setText(fechaObj.mayusculaMes(datoFecha[2]));
-        contDia=-1;
+        contDia = -1;
         diaDespues.setBackgroundResource(R.drawable.back_transparente);
         diaAtras.setBackgroundResource(R.drawable.back_transparente);
         condicionDiaActual();
 
     }
 
-    public void salirFechaEstacionMOnitoreo(boolean checkpadre,boolean checkencinas, boolean checkmuseo){
-        if(!checkpadre && !checkencinas && !checkmuseo) {
+    public void salirFechaEstacionMOnitoreo(boolean checkpadre, boolean checkencinas, boolean checkmuseo) {
+        if (!checkpadre && !checkencinas && !checkmuseo) {
             diaDespues.setBackgroundResource(R.drawable.keyboard_arrow_right);
             diaAtras.setBackgroundResource(R.drawable.back_transparente);
-            contDia=0;
+            contDia = 0;
         }
     }
 
-    public Condicion testCondicion(){
-       // informacion_restriccion.setImageResource(R.drawable.sin_conexion_bar);
-        tipoCondicion.setText("PREEMERGENCIA");
-        Condicion c=new Condicion();
-        c.setTipoCondicion("");
-        c.setTipoAlerta("PREEMERGENCIA");
-        return c;
-    }
+
 }

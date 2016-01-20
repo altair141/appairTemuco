@@ -213,7 +213,7 @@ public class Mapa extends AppCompatActivity implements LocationListener {
     public void onLocationChanged(Location location) {
         int lat = (int) (location.getLatitude());
         int lng = (int) (location.getLongitude());
-        System.out.println(location.getLatitude()+"possition"+location.getLongitude());
+        System.out.println(location.getLatitude() + "possition" + location.getLongitude());
         //latituteField.setText(String.valueOf(lat));
         //longitudeField.setText(String.valueOf(lng));
     }
@@ -252,7 +252,28 @@ public class Mapa extends AppCompatActivity implements LocationListener {
         getMenuInflater().inflate(R.menu.menu_inicio, menu);
         return true;
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                Intent intent = new Intent(Mapa.this, Mapa.class);
+                AlertDialog.Builder dialogo = new AlertDialog.Builder(Mapa.this);
+                intent.putExtra("tipoCondicion",mensaje);
+                dialogo.setTitle("Espere por favor");
+                dialogo.setMessage("Cargando datos...");
 
+                dialogo.create();
+                dialogo.show();
+
+                startActivity(intent);
+
+                setResult(Activity.RESULT_OK);
+
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     public void determinarFondo(){
         if (mensaje.equals("alerta") || mensaje.equals("Alerta") || mensaje.equals("ALERTA")) {
 

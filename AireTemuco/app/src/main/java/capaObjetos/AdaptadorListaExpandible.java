@@ -55,9 +55,11 @@ public class AdaptadorListaExpandible  extends BaseExpandableListAdapter {
         TextView item = (TextView) convertView.findViewById(R.id.laptop);
 
         convertView.setBackgroundColor(Color.BLACK);
-        convertView.setAlpha((float)0.8);
+        convertView.setAlpha((float) 0.8);
 
         item.setText(laptop);
+
+
         return convertView;
     }
 
@@ -80,6 +82,7 @@ public class AdaptadorListaExpandible  extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
         String laptopName = (String) getGroup(groupPosition);
+
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -99,6 +102,12 @@ public class AdaptadorListaExpandible  extends BaseExpandableListAdapter {
         }else {
             convertView.setBackgroundColor(Color.parseColor("#99000000"));
             //convertView.setBackgroundColor(99000000);
+        }
+        ImageView transportIcon = (ImageView) convertView.findViewById(R.id.indicadorgroup);
+        if (isExpanded) {
+            transportIcon.setImageResource(R.drawable.contraer); //poner imgen expandida
+        } else {
+            transportIcon.setImageResource(R.drawable.desplegar); // poner imagen para no expandida
         }
         return convertView;
     }
