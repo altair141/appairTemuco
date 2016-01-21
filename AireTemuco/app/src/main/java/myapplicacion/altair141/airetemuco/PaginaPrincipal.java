@@ -3,6 +3,7 @@ package myapplicacion.altair141.airetemuco;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.net.ConnectivityManager;
@@ -22,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.internal.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -273,7 +275,7 @@ public class PaginaPrincipal extends AppCompatActivity {
                                     .getSystemService(LAYOUT_INFLATER_SERVICE);
                     View popupView = layoutInflater.inflate(R.layout.popup, null);
                     final PopupWindow popupWindow = new PopupWindow(
-                            popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
                     ImageView btnDismiss = (ImageView) popupView.findViewById(R.id.cerrar_popup);
 
@@ -298,8 +300,8 @@ public class PaginaPrincipal extends AppCompatActivity {
                         }
                     });
 
-                    popupWindow.showAsDropDown(condicion_emergencia,50,-370);//50,-30///, 0, -360
-
+                  //  popupWindow.showAsDropDown(condicion_emergencia,50,-370);//50,-30///, 0, -360
+                    popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
 
                     if (banner.equals("restricción")) {
@@ -397,10 +399,16 @@ public class PaginaPrincipal extends AppCompatActivity {
         diaAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               // System.out.println(fechaString+" fecha string layout atras");
                 fecha = fechaObj.stringToDate(fechaString);
+               // System.out.println(fecha+" fecha date atras");
+                //System.out.println(fechaString+" fehcha obj atras -----");
+                //System.out.println(fechaFija+" fehcha fija atras----");
                 Date fechaF = fechaObj.stringToDate(fechaFija);
                 fechaF = fechaObj.sumarRestarDiasFecha(fechaF, -1);
-                if (fecha.after(fechaF) && contDia > 0 && contDia != -1) {
+                if (fecha.after(fechaF)
+                        && contDia > 0 && contDia != -1) {
+
                     fecha = fechaObj.sumarRestarDiasFecha(fecha, -1);
                     fechaString = fechaObj.dateToString(fecha);
                     String[] datoFecha = fechaObj.dividirFecha(fechaString);
@@ -409,6 +417,8 @@ public class PaginaPrincipal extends AppCompatActivity {
                     mesfechaText.setText(fechaObj.mayusculaMes(datoFecha[2]));
                     contDia--;
                     condicionDiaActual();
+
+
                     //diaSiguiente.setVisibility(LinearLayout.GONE);
                     // diaAtras.setVisibility(LinearLayout.GONE);
                     // diaDespues.setVisibility(LinearLayout.VISIBLE);
@@ -426,14 +436,16 @@ public class PaginaPrincipal extends AppCompatActivity {
         diaDespues.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //System.out.println(fechaString +"fecha string siguiente");
                 fecha = fechaObj.stringToDate(fechaString);
-                System.out.println(fechaString+" fehca-----");
+
                 if (fecha != null) {
                     //   System.out.println(fecha.toString() + "fechoa objeto -----");
                 } else {
 
                 }
                 Date fechaF = fechaObj.stringToDate(fechaFija);
+
                 fechaF = fechaObj.sumarRestarDiasFecha(fechaF, 1);
                 if (fecha.before(fechaF) && contDia != -1) {
                     fecha = fechaObj.sumarRestarDiasFecha(fecha, 1);
@@ -544,6 +556,13 @@ public class PaginaPrincipal extends AppCompatActivity {
 
             }
             //diaAnterior.setVisibility(LinearLayout.GONE);
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x;
+            int height = size.y;
+
+            System.out.println("x="+width+" , y="+height);
         }
 
         @Override

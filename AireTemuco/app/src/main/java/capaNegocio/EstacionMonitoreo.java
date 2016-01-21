@@ -113,18 +113,18 @@ public class EstacionMonitoreo {
 
 
                     if (i == 0) {
-                        System.out.println("fecha" + tds.get(i).text() + " " + i);
-                        System.out.println(fechaStringhoy);
+                        //System.out.println("fecha" + tds.get(i).text() + " " + i);
+                        //System.out.println(fechaStringhoy);
                         contaminacion.setDia(tds.get(i).text());
 
                     }
                         if (i == 1) {
-                            System.out.println("hora " + tds.get(i).text() + " " + i);
+                           // System.out.println("hora " + tds.get(i).text() + " " + i);
                             contaminacion.setHora(tds.get(i).text());
                         }
 
                         if (i == 2) {
-                            System.out.println("mp2,5 " + tds.get(i).text() + " " + i);
+                            //System.out.println("mp2,5 " + tds.get(i).text() + " " + i);
                             String mp2 = tds.get(i).text();
                             if (mp2.equals("")) {
                                 contaminacion.setMp25("");
@@ -134,7 +134,7 @@ public class EstacionMonitoreo {
                         }
 
                         if (i == 3) {
-                            System.out.println("mp10 " + tds.get(i).text() + " " + i);
+                          //  System.out.println("mp10 " + tds.get(i).text() + " " + i);
                             String mp1 = tds.get(i).text();
                             if (mp1.equals("")) {
                                 contaminacion.setMp10("");

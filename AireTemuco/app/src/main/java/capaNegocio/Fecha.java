@@ -28,12 +28,14 @@ public class Fecha {
     }
 
     public  Date stringToDate(String fecha) {
+      //  System.out.println(fecha+" fecha recibida en string to date");
         if (validarFecha(fecha)) {
             try {
 
-                DateFormat f = new SimpleDateFormat("EEEE-dd-MM");
+                DateFormat f = new SimpleDateFormat("EEEE-dd-MM-yyyy");
                 String str1 = fecha;
                 Date date = f.parse(str1);
+        //        System.out.println(date +"fecha del date a partir de la fecha, clase Fecha");
                 return date;
 
             } catch (ParseException e) {
@@ -41,6 +43,7 @@ public class Fecha {
                 e.printStackTrace();
                 return null;
             } catch (NullPointerException c) {
+          //      System.out.println("se cae de null");
                 return null;
             }
         }
@@ -66,10 +69,13 @@ public class Fecha {
         return null;
     }
     private boolean validarFecha(String fecha) {
+        //System.out.println(fecha+" fecha recibida para validar");
         try {
-            DateFormat f = new SimpleDateFormat("EEEE-dd-MM");
+            DateFormat f = new SimpleDateFormat("EEEE-dd-MM-yyyy");
             String str1 = fecha;
+          //  System.out.println(str1 +"falla aqui??");
             Date date = f.parse(str1);
+            //System.out.println(date +" fecha validada");
             return true;
         } catch (ParseException e) {
             return false;
@@ -93,7 +99,7 @@ public class Fecha {
     }
     public String dateToString(Date date){
 
-        DateFormat f = new SimpleDateFormat("EEEE-dd-MM");
+        DateFormat f = new SimpleDateFormat("EEEE-dd-MM-yyyy");
         String fecha=f.format(date);
         return fecha;
     }
@@ -105,9 +111,9 @@ public class Fecha {
     }
     public String generarFecha(){
         Date date = new Date();
-        DateFormat f = new SimpleDateFormat("EEEE-dd-MM");
+        DateFormat f = new SimpleDateFormat("EEEE-dd-MM-yyyy");
         String fecha=f.format(date);
-
+        //System.out.println(fecha+" fecha generada");
         return fecha;
     }
     public String generarFecha2(){
@@ -118,7 +124,7 @@ public class Fecha {
         return fecha;
     }
     public  Date sumarRestarDiasFecha(Date fecha, int dias){
-        System.out.println(fecha.toString()+"-p--");
+        //System.out.println(fecha.toString()+"-p--");
         Calendar calendar = Calendar.getInstance();
 
         calendar.setTime(fecha); // Configuramos la fecha que se recibe

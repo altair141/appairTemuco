@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:weightSum="1"
-        android:id="@+id/contenedor_principal"
-        android:foreground="@drawable/fondo_negro_popup">
+        android:id="@+id/contenedor_principal">
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
