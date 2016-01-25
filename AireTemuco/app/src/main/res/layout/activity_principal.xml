@@ -48,11 +48,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="SIN CONEXIÓN"
+                android:text="SIN INFORMACIÓN"
                 android:id="@+id/condicionTexto"
                 android:textColor="@color/PrimaryColor"
-                android:textSize="@dimen/texto_tipo_caliad_aire_pre_emergencia"
-                android:gravity="center" />
+                android:textSize="@dimen/principal_texto_condicion_ambiental"
+                android:gravity="center"
+                android:textIsSelectable="false" />
 
 
         </LinearLayout>
@@ -69,10 +70,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:gravity="center|top">
+
             <include
                 android:id="@+id/fechsa"
                 layout="@layout/fecha"

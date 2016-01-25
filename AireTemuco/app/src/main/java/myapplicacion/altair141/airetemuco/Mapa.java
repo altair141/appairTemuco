@@ -367,6 +367,10 @@ public class Mapa extends AppCompatActivity implements LocationListener {
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))); //Color del marcador
     }
     private void drawPoligono(PolygonOptions opts){
-        Polygon poligono = mMap.addPolygon(opts);
+        try {
+            Polygon poligono = mMap.addPolygon(opts);
+        }catch (NullPointerException e){
+
+        }
     }
 }

@@ -573,8 +573,8 @@ public class PaginaPrincipal extends AppCompatActivity {
                 Condicion condicion = new Condicion();
                 if (isOnline()) {
                     condicion.start();
-                    condicion.setTipoCondicion("preemergencia");//Bueno
-                    condicion.setTipoAlerta("restricción");//sin restricción
+                  //  condicion.setTipoCondicion("Bueno");//Bueno//preemergencia
+                   // condicion.setTipoAlerta("sin restricción");//sin restricción//restricción
                     backgroud(condicion);
                     banner(condicion);
 

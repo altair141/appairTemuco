@@ -6,78 +6,95 @@
 
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1"
-        android:gravity="center">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/principal_texto_fecha_arriba"></LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:paddingLeft="16dp"
-            android:id="@+id/btnAtras">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/diaAtras"
-                android:src="@drawable/back_transparente" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/btnSiguiente"
-            android:layout_alignBottom="@+id/btnSiguiente"
-            android:layout_weight="0.99"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
             android:gravity="center">
 
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/diaFecha"
-                android:gravity="center"
-                android:textSize="14dp"
-                android:textColor="#fff" />
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="16dp"
+                android:id="@+id/btnAtras">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/idFecha"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:textColor="#fff"
-                android:textStyle="bold" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/diaAtras"
+                    android:src="@drawable/back_transparente" />
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/btnSiguiente"
+                android:layout_alignBottom="@+id/btnSiguiente"
+                android:layout_weight="0.99"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/diaFecha"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/idFecha"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mesFecha"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/mesFecha"
-                android:textColor="#fff" />
+                android:id="@+id/btnSiguiente"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/diaSiguiente"
+                    android:src="@drawable/back_transparente"
+                    android:layout_gravity="right" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnSiguiente"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:paddingRight="16dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/diaSiguiente"
-                android:src="@drawable/back_transparente"
-                android:layout_gravity="right" />
-        </LinearLayout>
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/principal_texto_fecha_abajo"></LinearLayout>
 
     </LinearLayout>
 

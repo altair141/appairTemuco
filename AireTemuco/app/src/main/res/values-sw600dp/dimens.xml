@@ -1,5 +1,5 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Default screen margins, per the Android Design guidelines.  NEXUS 7-->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!--<dimen name="texto_tipo_caliad_aire_pre_emergencia">38sp</dimen>-->
@@ -10,10 +10,10 @@
     <dimen name="popup_icono_imagen_abajo">20dp</dimen>
     <dimen name="popup_texto_abajo">20dp</dimen>
 
-    <dimen name="principal_estacion_monitoreo">10dp</dimen>
-    <dimen name="principal_texto_condicion_ambiental">34dp</dimen>
-    <dimen name="principal_texto_fecha_arriba">10dp</dimen>
-    <dimen name="principal_texto_fecha_abajo">20dp</dimen>
+    <dimen name="principal_estacion_monitoreo">30dp</dimen>
+    <dimen name="principal_texto_condicion_ambiental">60dp</dimen>
+    <dimen name="principal_texto_fecha_arriba">30dp</dimen>
+    <dimen name="principal_texto_fecha_abajo">40dp</dimen>
 
-    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="toolbar_height">150dp</dimen>
 </resources>

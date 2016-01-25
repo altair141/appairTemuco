@@ -15,5 +15,5 @@
     <dimen name="principal_texto_fecha_arriba">10dp</dimen>
     <dimen name="principal_texto_fecha_abajo">20dp</dimen>
 
-    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="toolbar_height">100dp</dimen>
 </resources>
