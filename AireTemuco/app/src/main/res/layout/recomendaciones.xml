@@ -42,7 +42,8 @@
                     android:text="Recomendaciones"
                     android:id="@+id/textView6"
                     android:layout_marginLeft="2dp"
-                    android:textColor="@color/PrimaryColor" />
+                    android:textColor="@color/PrimaryColor"
+                    android:textSize="@dimen/texto_titulo_layout" />
             </LinearLayout>
         </LinearLayout>
 

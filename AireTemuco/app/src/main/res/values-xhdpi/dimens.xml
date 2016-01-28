@@ -1,5 +1,5 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. moto g -->
+    <!-- Default screen margins, per the Android Design guidelines. moto g  sony xperia c4 -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!--<dimen name="texto_tipo_caliad_aire_pre_emergencia">38sp</dimen>-->
@@ -10,10 +10,21 @@
     <dimen name="popup_icono_imagen_abajo">20dp</dimen>
     <dimen name="popup_texto_abajo">20dp</dimen>
 
+    <dimen name="principal_texto_temperatura">45sp</dimen>
     <dimen name="principal_estacion_monitoreo">15dp</dimen>
-    <dimen name="principal_texto_condicion_ambiental">40dp</dimen>
-    <dimen name="principal_texto_fecha_arriba">30dp</dimen>
-    <dimen name="principal_texto_fecha_abajo">50dp</dimen>
-
+    <dimen name="principal_estacion_monitoreo_abajo">45dp</dimen>
+    <dimen name="principal_texto_condicion_ambiental">38dp</dimen>
+    <dimen name="principal_texto_fecha_arriba">5dp</dimen>
+    <dimen name="principal_texto_fecha_abajo">15dp</dimen>
+    <dimen name="principal_fecha_texto">20sp</dimen>
+    <dimen name="texto_titulo_layout">17sp</dimen>
+    <dimen name="texto_titulo_layout_mapa_negrita">16sp</dimen>
+    <dimen name="texto_titulo_layout_mapa">13sp</dimen>
     <dimen name="toolbar_height">80dp</dimen>
+
+
+
+    <dimen name="recomendacion_margen_izq_der_texto">10dp</dimen>
+    <dimen name="recomendacion_texto">13sp</dimen>
+    <dimen name="recomedacion_height">93dp</dimen>
 </resources>

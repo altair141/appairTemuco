@@ -39,10 +39,15 @@
         </FrameLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/principal_estacion_monitoreo_abajo"></LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -99,7 +104,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/imagenClima"
                     android:src="@drawable/parcial_clima"
-                    />
+                    android:layout_marginRight="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -107,7 +112,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="14°C"
                     android:id="@+id/temperatura"
-                    android:textSize="30pt"
+                    android:textSize="@dimen/principal_texto_temperatura"
                     android:textColor="@color/PrimaryColor" />
             </LinearLayout>
 

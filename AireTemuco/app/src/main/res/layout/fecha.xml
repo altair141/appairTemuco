@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/contenedorFecha">
 
         <LinearLayout
             android:orientation="vertical"
@@ -53,8 +53,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/diaFecha"
                     android:gravity="center"
-                    android:textSize="14dp"
-                    android:textColor="#fff" />
+                    android:textSize="@dimen/principal_fecha_texto"
+                    android:textColor="#fff"
+                    android:text="lunes" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -63,19 +64,23 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:textColor="#fff"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="@dimen/principal_fecha_texto"
+                    android:text="01" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/mesFecha"
-                    android:textColor="#fff" />
+                    android:textColor="#fff"
+                    android:textSize="@dimen/principal_fecha_texto"
+                    android:text="febrero" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/btnSiguiente"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"

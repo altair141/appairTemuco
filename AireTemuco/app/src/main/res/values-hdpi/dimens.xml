@@ -1,5 +1,5 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. xperia l-->
+    <!-- Default screen margins, per the Android Design guidelines. xperia l, nexus one-->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!--<dimen name="texto_tipo_caliad_aire_pre_emergencia">38sp</dimen>-->
@@ -12,8 +12,20 @@
 
     <dimen name="principal_estacion_monitoreo">10dp</dimen>
     <dimen name="principal_texto_condicion_ambiental">34dp</dimen>
-    <dimen name="principal_texto_fecha_arriba">10dp</dimen>
-    <dimen name="principal_texto_fecha_abajo">20dp</dimen>
+    <dimen name="principal_texto_fecha_arriba">1dp</dimen>
+    <dimen name="principal_texto_fecha_abajo">15dp</dimen>
+    <dimen name="principal_fecha_texto">20sp</dimen>
+    <dimen name="principal_texto_temperatura">35sp</dimen>
 
     <dimen name="toolbar_height">56dp</dimen>
+
+    <dimen name="texto_titulo_layout_mapa_negrita">14sp</dimen>
+    <dimen name="texto_titulo_layout_mapa">11sp</dimen>
+
+
+    <dimen name="texto_titulo_layout">15sp</dimen>
+
+    <dimen name="recomendacion_margen_izq_der_texto">5dp</dimen>
+    <dimen name="recomendacion_texto">12sp</dimen>
+    <dimen name="recomedacion_height">85dp</dimen>
 </resources>

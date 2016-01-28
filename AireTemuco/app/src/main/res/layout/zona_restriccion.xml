@@ -52,7 +52,8 @@
                             android:text="Zonas de Restricción"
                             android:id="@+id/textView"
                             android:textColor="#fff"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:textSize="@dimen/texto_titulo_layout_mapa_negrita" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -66,7 +67,7 @@
                             android:text="Verifica si estás dentro de la Zona de Restricción"
                             android:id="@+id/textView2"
                             android:textColor="#fff"
-                            android:textSize="11dp" />
+                            android:textSize="@dimen/texto_titulo_layout_mapa" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

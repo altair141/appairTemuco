@@ -94,8 +94,10 @@ public class PaginaPrincipal extends AppCompatActivity {
     private String mensaje;
     private int contDia = 0;
     private int contadorpopup = 0;
+
     private LinearLayout diaSiguiente;
     private LinearLayout diaAnterior;
+    private LinearLayout contenedorFecha;
     private final Fecha fechaObj = new Fecha();
     private DiaWeather dia = new DiaWeather();
     //widget del popup
@@ -141,7 +143,7 @@ public class PaginaPrincipal extends AppCompatActivity {
         tipoCondicion = (TextView) findViewById(R.id.condicionTexto);
         imagenClima = (ImageView) findViewById(R.id.imagenClima);
         temperatura = (TextView) findViewById(R.id.temperatura);
-
+        contenedorFecha=(LinearLayout)findViewById(R.id.contenedorFecha);
         contenedorPrincipal=(LinearLayout)findViewById(R.id.contenedor_principal);
         //------------fecha---------------------
 
@@ -545,6 +547,7 @@ public class PaginaPrincipal extends AppCompatActivity {
                 encinas.setVisibility(LinearLayout.GONE);
                 museo.setVisibility(LinearLayout.GONE);
                 layoutTiempo.setVisibility(LinearLayout.GONE);
+                contenedorFecha.setVisibility(LinearLayout.GONE);
             } else {
                 diaDespues.setVisibility(LinearLayout.VISIBLE);
                 diaAtras.setVisibility(LinearLayout.VISIBLE);
@@ -552,6 +555,7 @@ public class PaginaPrincipal extends AppCompatActivity {
                 encinas.setVisibility(LinearLayout.VISIBLE);
                 museo.setVisibility(LinearLayout.VISIBLE);
                 layoutTiempo.setVisibility(LinearLayout.VISIBLE);
+                contenedorFecha.setVisibility(LinearLayout.VISIBLE);
 
 
             }
